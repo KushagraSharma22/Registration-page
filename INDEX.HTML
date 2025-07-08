@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Community for Girls - Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #4f46e5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #4f46e5;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4f46e5;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 12px 16px;
+            background: #f3f4f6;
+            border: 2px dashed #d1d5db;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .file-upload-label:hover {
+            background: #e5e7eb;
+            border-color: #4f46e5;
+        }
+
+        .file-upload-label.has-file {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        .whatsapp-section {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-btn:hover:not(:disabled) {
+            background: #128c7e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .counter {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: #059669;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: 40px;
+            background: #f0fdf4;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .form-success h2 {
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tech Community for Girls</h1>
+            <p>Join our amazing tech community and grow together!</p>
+        </div>
+
+        <div class="form-container">
+            <form id="registrationForm">
+                <!-- Basic Details Section -->
+                <div class="section">
+                    <h2 class="section-title">Basic Details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email ID <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required maxlength="10">
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="college">College Name <span class="required">*</span></label>
+                            <input type="text" id="college" name="college" required>
+                            <div class="error-message" id="collegeError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="branch">Branch <span class="required">*</span></label>
+                            <select id="branch" name="branch" required>
+                                <option value="">Select Branch</option>
+                                <option value="CSE">Computer Science Engineering</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="ECE">Electronics & Communication</option>
+                                <option value="EE">Electrical Engineering</option>
+                                <option value="ME">Mechanical Engineering</option>
+                                <option value="CE">Civil Engineering</option>
+                            </select>
+                            <div class="error-message" id="branchError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="year">Year <span class="required">*</span></label>
+                            <select id="year" name="year" required>
+                                <option value="">Select Year</option>
+                                <option value="1st">1st Year</option>
+                                <option value="2nd">2nd Year</option>
+                                <option value="3rd">3rd Year</option>
+                                <option value="Final">Final Year</option>
+                            </select>
+                            <div class="error-message" id="yearError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="male" name="gender" value="Male">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="female" name="gender" value="Female">
+                                <label for="female">Female</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="other" name="gender" value="Other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="genderError"></div>
+                    </div>
+                </div>
+
+                <!-- Screenshot Upload Section -->
+                <div class="section">
+                    <h2 class="section-title">Screenshot Upload</h2>
+                    <div class="form-group">
+                        <label for="screenshot">Upload Screenshot (Resume/Photo/Proof)</label>
+                        <div class="file-upload">
+                            <input type="file" id="screenshot" name="screenshot" accept=".png,.jpg,.jpeg,.pdf">
+                            <label for="screenshot" class="file-upload-label" id="fileLabel">
+                                📁 Click to select file (.png, .jpg, .jpeg, .pdf)
+                            </label>
+                        </div>
+                        <div class="error-message" id="screenshotError"></div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Share Section -->
+                <div class="section">
+                    <h2 class="section-title">Share & Invite Friends</h2>
+                    <div class="whatsapp-section">
+                        <div class="counter" id="shareCounter">Click count: 0/5</div>
+                        <button type="button" class="whatsapp-btn" id="whatsappBtn">
+                            📱 Share on WhatsApp
+                        </button>
+                        <div class="success-message" id="shareSuccess" style="display: none;">
+                            ✅ Sharing complete. Please continue.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    Submit Registration
+                </button>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Submitting your registration...</p>
+            </div>
+
+            <div class="form-success" id="formSuccess" style="display: none;">
+                <h2>🎉 Registration Successful!</h2>
+                <p>Thank you for joining the Tech Community for Girls. We'll contact you soon with more details!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if already submitted on page load
+        window.addEventListener('load', function() {
+            const isSubmitted = localStorage.getItem('techGirlsRegistered');
+            if (isSubmitted) {
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('formSuccess').style.display = 'block';
+                disableAllInputs();
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            
+            // Name validation
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                isValid = false;
+            }
+            
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email';
+                isValid = false;
+            }
+            
+            // Phone validation
+            const phone = document.getElementById('phone').value.trim();
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!phone) {
+                document.getElementById('phoneError').textContent = 'Phone number is required';
+                isValid = false;
+            } else if (!phoneRegex.test(phone)) {
+                document.getElementById('phoneError').textContent = 'Please enter a valid 10-digit phone number';
+                isValid = false;
+            }
+            
+            // College validation
+            const college = document.getElementById('college').value.trim();
+            if (!college) {
+                document.getElementById('collegeError').textContent = 'College name is required';
+                isValid = false;
+            }
+            
+            // Branch validation
+            const branch = document.getElementById('branch').value;
+            if (!branch) {
+                document.getElementById('branchError').textContent = 'Please select a branch';
+                isValid = false;
+            }
+            
+            // Year validation
+            const year = document.getElementById('year').value;
+            if (!year) {
+                document.getElementById('yearError').textContent = 'Please select a year';
+                isValid = false;
+            }
+            
+            // Gender validation
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('genderError').textContent = 'Please select a gender';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // WhatsApp sharing functionality
+        let shareCount = 0;
+        const maxShares = 5;
+        
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            if (shareCount < maxShares) {
+                shareCount++;
+                document.getElementById('shareCounter').textContent = `Click count: ${shareCount}/${maxShares}`;
+                
+                // Open WhatsApp with pre-filled message
+                const message = encodeURIComponent('Hey Buddy, Join Tech For Girls Community!');
+                window.open(`https://wa.me/?text=${message}`, '_blank');
+                
+                if (shareCount >= maxShares) {
+                    this.disabled = true;
+                    document.getElementById('shareSuccess').style.display = 'block';
+                    document.getElementById('submitBtn').disabled = false;
+                }
+            }
+        });
+
+        // File upload handling
+        document.getElementById('screenshot').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const label = document.getElementById('fileLabel');
+            
+            if (file) {
+                const validTypes = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
+                if (validTypes.includes(file.type)) {
+                    label.textContent = `📄 ${file.name}`;
+                    label.classList.add('has-file');
+                    document.getElementById('screenshotError').textContent = '';
+                } else {
+                    label.textContent = '📁 Click to select file (.png, .jpg, .jpeg, .pdf)';
+                    label.classList.remove('has-file');
+                    document.getElementById('screenshotError').textContent = 'Please select a valid file format';
+                    e.target.value = '';
+                }
+            }
+        });
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            if (shareCount < maxShares) {
+                alert('Please complete the WhatsApp sharing (5 clicks) before submitting!');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('registrationForm').style.display = 'none';
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (key === 'screenshot' && value.name) {
+                    data[key] = value.name; // Store file name
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Add timestamp
+            data.timestamp = new Date().toISOString();
+            
+            // Google Apps Script Web App URL - Now connected to your sheet!
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec';
+            
+            // Submit to Google Sheets
+            fetch(webAppUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('loading').style.display = 'none';
+                if (result.success) {
+                    document.getElementById('formSuccess').style.display = 'block';
+                    localStorage.setItem('techGirlsRegistered', 'true');
+                    disableAllInputs();
+                } else {
+                    alert('Submission failed: ' + result.message);
+                    document.getElementById('registrationForm').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('registrationForm').style.display = 'block';
+                alert('Network error. Please check your connection and try again.');
+            });
+        });
+
+        function disableAllInputs() {
+            document.querySelectorAll('input, select, button').forEach(el => {
+                el.disabled = true;
+            });
+        }
+
+        // Phone number input restriction
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+</body>
+</html>
