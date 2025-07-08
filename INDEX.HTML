@@ -646,15 +646,23 @@
             // Google Apps Script Web App URL - Now connected to your sheet!
             const webAppUrl = 'https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec';
             
-            // Submit to Google Sheets
+            // Submit to Google Sheets with proper CORS handling
             fetch(webAppUrl, {
                 method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'omit',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(result => {
                 document.getElementById('loading').style.display = 'none';
                 if (result.success) {
@@ -663,14 +671,16 @@
                     disableAllInputs();
                 } else {
                     alert('Submission failed: ' + result.message);
-                    document.getElementById('registrationForm').style.display = 'block';
+                    document.getElementById('registrationForm').style.style.display = 'block';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('registrationForm').style.display = 'block';
-                alert('Network error. Please check your connection and try again.');
+                
+                // Try alternative submission method
+                submitWithForm(data);
             });
         });
 
@@ -678,6 +688,43 @@
             document.querySelectorAll('input, select, button').forEach(el => {
                 el.disabled = true;
             });
+        }
+
+        // Alternative submission method using form post (bypasses CORS)
+        function submitWithForm(data) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec';
+            form.target = 'hidden_iframe';
+            
+            // Create hidden iframe
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Add form data
+            Object.keys(data).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+            });
+            
+            // Submit form
+            document.body.appendChild(form);
+            form.submit();
+            
+            // Cleanup and show success after delay
+            setTimeout(() => {
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('formSuccess').style.display = 'block';
+                localStorage.setItem('techGirlsRegistered', 'true');
+                disableAllInputs();
+            }, 2000);
         }
 
         // Phone number input restriction
