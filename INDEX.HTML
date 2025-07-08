@@ -733,47 +733,6 @@
         });
     </script>
 </body>
-<script>
-document.getElementById("registrationForm").addEventListener("submit", function (e) {
-  e.preventDefault();
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwwD920tduWqSpVasP9WQaUBH199fBvwGrpv3CJTKQPlikazNz7KVWl5wgw8cHq_jQncA/exec"; // replace this with your actual deployed script URL
-
-  const form = document.getElementById("registrationForm");
-
-  const data = {
-    timestamp: new Date().toLocaleString(),
-    name: form.name.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    college: form.college.value,
-    branch: form.branch.value,
-    year: form.year.value,
-    gender: form.gender.value,
-    screenshot: form.screenshot.value.split("\\").pop() || "No file uploaded"
-  };
-
-  fetch(scriptURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.success) {
-        alert("✅ Registration successful!");
-        form.reset();
-      } else {
-        alert("❌ Something went wrong: " + res.message);
-      }
-    })
-    .catch((err) => {
-      console.error("Fetch error:", err);
-      alert("❌ Error submitting form.");
-    });
-});
-</script>
 
 </html>
