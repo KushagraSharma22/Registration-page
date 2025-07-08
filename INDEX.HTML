@@ -644,7 +644,7 @@
             data.timestamp = new Date().toISOString();
             
             // Google Apps Script Web App URL - Now connected to your sheet!
-            const webAppUrl = 'https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec';
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbwwD920tduWqSpVasP9WQaUBH199fBvwGrpv3CJTKQPlikazNz7KVWl5wgw8cHq_jQncA/exec';
             
             // Submit to Google Sheets with proper CORS handling
             fetch(webAppUrl, {
@@ -694,7 +694,7 @@
         function submitWithForm(data) {
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec';
+            form.action = 'https://script.google.com/macros/s/AKfycbwwD920tduWqSpVasP9WQaUBH199fBvwGrpv3CJTKQPlikazNz7KVWl5wgw8cHq_jQncA/exec';
             form.target = 'hidden_iframe';
             
             // Create hidden iframe
@@ -737,7 +737,7 @@
 document.getElementById("registrationForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwD-xY-4A3Xd7DbfB8WbJ5p-kxHC46_h_lR8-aXugleCBkcX3RvllPdlHCs6rnnuNoLYA/exec"; // replace this with your actual deployed script URL
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwwD920tduWqSpVasP9WQaUBH199fBvwGrpv3CJTKQPlikazNz7KVWl5wgw8cHq_jQncA/exec"; // replace this with your actual deployed script URL
 
   const form = document.getElementById("registrationForm");
 
